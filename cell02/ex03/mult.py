@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 print("Enter the first number:")
 num_1 = float(input())
 num_1 = int(num_1) if num_1.is_integer() else num_1

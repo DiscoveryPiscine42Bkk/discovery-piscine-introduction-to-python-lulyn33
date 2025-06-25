@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 a = 0 
 while a <= 10:
     print(f"Table de {a} :",end=' ')

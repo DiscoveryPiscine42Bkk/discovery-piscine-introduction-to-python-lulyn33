@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 word = input()
 for i in word:
     if i == i.upper():
