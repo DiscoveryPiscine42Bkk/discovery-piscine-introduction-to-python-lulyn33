@@ -11,5 +11,6 @@ else:
         for i in para:
             if i == 'z':
                 print(i,end='')
+        print('\n')
     
         
