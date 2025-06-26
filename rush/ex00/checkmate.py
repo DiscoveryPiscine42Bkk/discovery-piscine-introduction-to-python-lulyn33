@@ -1,17 +1,14 @@
-board = """\
-..
-.K\
-"""
-    
-lst = board.split()
-# print(lst)
-def checkmate(lst):
+def checkmate(board):
+    lst = board.split()
+
     size = len(lst)
+    success = True
     for row in range(0, len(lst)):
         for col in range(0, len(lst)):
-            if not lst[row][col] in ['P',"Q","B","R"]:
-                success = False #give one variable as success = False
-            else:       
+            
+            if not lst[row][col] in ["P","Q","B","R"]:
+                success = False   
+            else:
                 if lst[row][col] == 'P':
                     pawn_attack(lst,row,col,size)
                 elif lst[row][col] == 'R':
@@ -20,20 +17,21 @@ def checkmate(lst):
                     bishop_attack(lst,row,col,size)
                 elif lst[row][col] == 'Q':
                     queen_attack(lst,row,col,size)
-            
+                    
+            return "Success" if success else "Fail"       
                 
 def pawn_attack(board,row,col,size):
     try:
         col < size
         if board[row-1][col-1] == 'K':
-            print("Success")
+            return "Success"
         elif board[row-1][col+1] == 'K':
-            print("Success")
+            return "Success"
         else:
-            print('Fail')
+            return "Fail"
             
     except IndexError:
-        print('Fail')
+        return "Fail"
 #pawn attack is done        
 
 def rook_attack(board,row,col,size):
@@ -48,7 +46,7 @@ def rook_attack(board,row,col,size):
             found = True
             break
         
-    print("Success" if found else "Fail")  
+    return "Success" if found else "Fail"  
 #rook attack is done
 
 def bishop_attack(board,row,col,size):
@@ -86,7 +84,7 @@ def bishop_attack(board,row,col,size):
         r += 1
         c += 1
 
-    print("Success" if found else "Fail")
+    return "Success" if found else "Fail"
  
 def queen_attack(board,row,col,size):
     found = False
@@ -128,9 +126,4 @@ def queen_attack(board,row,col,size):
         r += 1
         c += 1
         
-    print("Success" if found else "Fail")
-
-checkmate(lst)
-
-    
-    
+    return "Success" if found else "Fail"
