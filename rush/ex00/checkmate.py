@@ -27,7 +27,7 @@ def pawn_attack(board,row,col,size):
             
     except IndexError:
         return "Fail"
-#pawn attack is done        
+#pawn attack       
 
 def rook_attack(board,row,col,size):
     r = row - 1
@@ -63,7 +63,7 @@ def rook_attack(board,row,col,size):
         c +=1
         
     return "Fail"
-#rook attack is done
+#rook attack
 
 def bishop_attack(board,row,col,size):
     found = False
@@ -101,9 +101,11 @@ def bishop_attack(board,row,col,size):
         c += 1
 
     return "Success" if found else "Fail"
+#bishop_attack
  
 def queen_attack(board,row,col,size):
     if rook_attack(board,row,col,size) == "Success" or bishop_attack(board,row,col,size) == 'Success':
         return 'Success'
     else:
         return 'Fail'
+#queen_attack
