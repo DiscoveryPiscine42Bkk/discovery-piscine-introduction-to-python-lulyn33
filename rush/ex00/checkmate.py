@@ -2,6 +2,10 @@ def checkmate(board):
     lst = board.split()
 
     size = len(lst)
+    for i in lst:
+        if len(i) != size:
+            return "Fail"
+    
     for row in range(0, len(lst)):
         for col in range(0, len(lst)):
             if lst[row][col] == 'P' and pawn_attack(lst,row,col,size) == "Success":
