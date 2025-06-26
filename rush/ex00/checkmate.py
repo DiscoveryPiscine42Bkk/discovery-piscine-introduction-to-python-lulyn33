@@ -5,20 +5,16 @@ def checkmate(board):
     success = True
     for row in range(0, len(lst)):
         for col in range(0, len(lst)):
-            
-            if not lst[row][col] in ["P","Q","B","R"]:
-                success = False   
-            else:
-                if lst[row][col] == 'P':
-                    pawn_attack(lst,row,col,size)
-                elif lst[row][col] == 'R':
-                    rook_attack(lst,row,col,size)
-                elif lst[row][col] == 'B':
-                    bishop_attack(lst,row,col,size)
-                elif lst[row][col] == 'Q':
-                    queen_attack(lst,row,col,size)
-                    
-            return "Success" if success else "Fail"       
+            if lst[row][col] == 'P' and pawn_attack(lst,row,col,size) == "Success":
+                return "Success"
+            elif lst[row][col] == 'R' and rook_attack(lst,row,col,size) == "Success":
+                return "Success"
+            elif lst[row][col] == 'B' and bishop_attack(lst,row,col,size) == "Success":
+                return "Success"
+            elif lst[row][col] == 'Q' and queen_attack(lst,row,col,size) == "Success":
+                return "Success"
+                            
+    return "Fail"      
                 
 def pawn_attack(board,row,col,size):
     try:
@@ -35,18 +31,39 @@ def pawn_attack(board,row,col,size):
 #pawn attack is done        
 
 def rook_attack(board,row,col,size):
-    found = False
-    for c in range(size):
-        if board[row][c] == 'K':
-            found = True
+    r = row - 1
+    while r >= 0:
+        if board[r][col] == 'K':
+           return 'Success'
+        elif board[r][col] != '.':
             break
+        r -= 1
     
-    for r in range(size):
-        if board[r][col] == 'K':      
-            found = True
+    r = row+1
+    while r < size:
+        if board[r][col] == 'K':
+            return 'Success'
+        elif board[r][col] != '.':
             break
+        r += 1
+    
+    c = col -1
+    while c >= 0:
+        if board[row][c] == 'K':
+            return 'Success'
+        elif board[row][c] != '.':
+            break
+        c -= 1 
+            
+    c = col + 1
+    while c < size:
+        if board[row][c] == 'K':
+            return 'Success'
+        elif board[row][c] != '.':
+            break
+        c +=1
         
-    return "Success" if found else "Fail"  
+    return "Fail"
 #rook attack is done
 
 def bishop_attack(board,row,col,size):
@@ -87,43 +104,7 @@ def bishop_attack(board,row,col,size):
     return "Success" if found else "Fail"
  
 def queen_attack(board,row,col,size):
-    found = False
-    for i in range(size):
-            if board[i][col] == 'K' or board[row][i] == 'K':
-                found = True
-            else:
-                continue
-                
-    r, c = row - 1, col - 1
-    while r >= 0 and c >= 0:
-        if board[r][c] == 'K':
-            found = True
-            break
-        r -= 1
-        c -= 1
-
-    r, c = row - 1, col + 1
-    while r >= 0 and c < size:
-        if board[r][c] == 'K':
-            found = True
-            break
-        r -= 1
-        c += 1
-
-    r, c = row + 1, col - 1
-    while r < size and c >= 0:
-        if board[r][c] == 'K':
-            found = True
-            break
-        r += 1
-        c -= 1
-
-    r, c = row + 1, col + 1
-    while r < size and c < size:
-        if board[r][c] == 'K':
-            found = True
-            break
-        r += 1
-        c += 1
-        
-    return "Success" if found else "Fail"
+    if rook_attack(board,row,col,size) == "Success" or bishop_attack(board,row,col,size) == 'Success':
+        return 'Success'
+    else:
+        return 'Fail'
