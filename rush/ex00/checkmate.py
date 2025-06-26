@@ -1,5 +1,5 @@
 def checkmate(board):
-    lst = board.split()
+    lst = board.split() 
 
     size = len(lst)
     for i in lst:
@@ -9,9 +9,20 @@ def checkmate(board):
             break
         else:
             square = True
+    
+    check_k_lst = []
+    for k in lst:
+        for l in range(len(lst)):
+            if k[l] == 'K':
+                check_k_lst.append(k[l])
+    
+    if len(check_k_lst) > 1:
+        print('Fail')
+        square = False
+    else:
+        square = True
             
     found = False
-
     while square:
         for row in range(0, len(lst)):
             for col in range(0, len(lst)):
